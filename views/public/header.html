@@ -1,0 +1,38 @@
+<div class="navbar navbar-static-top">
+  <div class="navbar-inner">
+    <div class="container">
+
+      <a href="/" class="brand" title="大开网"><img src="/images/logo.png" /></a>
+
+      <form class="navbar-form pull-left offset1">
+        <div class="input-append">
+          <input type="text" class="q" name="q" placeholder="搜索小组,话题,用户" />
+          <input type="submit" class="btn" name="submit" value=" 搜索 " />
+        </div>
+      </form>
+
+      <if condition="$logged_in">
+      <ul class="nav pull-right">
+        <li><a href="/i/home"><i class="icon-home"></i> 我的首页</a></li>
+        <li><a href="/i/message"><i class="icon-envelope"></i> 消息(0)</a></li>
+        <li>
+          <a id="user-profile-dropdown" class="dropdown-toggle" data-toggle="dropdown" href="javascript:;">无言以对 <b class="caret"></b></a>
+          <ul class="dropdown-menu" aria-labelledby="user-profile-dropdown">
+            <li><a href="/i/profile"><i class="icon-user"></i> 我的资料</a></li>
+            <li><a href="/i/avatar"><i class="icon-picture"></i> 修改头像</a></li>
+            <li class="divider"></li>
+            <li><a href="/signout"><i class="icon-off"></i> 退出登录</a></li>
+          </ul>
+        </li>
+      </ul>
+      <else />
+      <div class="pull-right">
+        <a class="btn btn-small btn-success" href="/signin"><i class="icon-lock icon-white"></i> 登录</a>
+        &nbsp;&nbsp;
+        <a class="btn btn-small btn-success" href="/signup"><i class="icon-user icon-white"></i> 轻松注册</a>
+      </div>
+      </if>
+
+    </div>
+  </div>
+</div>

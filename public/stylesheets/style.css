@@ -1,0 +1,88 @@
+@import url("bootstrap.min.css");
+html { overflow-y: scroll; }
+body { color: #838383; line-height: 22px; font: 14/18px "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; background: url("../images/bg.png") repeat-x #FFF; }
+.margin-left-10 { margin-left: 10px; }
+label.error { margin-left: 10px; display: inline; color: #D70002; }
+.table th.center, .table td.center { text-align: center; }
+.navbar .nav li a.dropdown-toggle { padding-right: 0; }
+.navbar .nav i { margin-top: 1px; }
+.navbar .btn { margin-top: 8px; }
+.block { margin: 20px 0 10px; overflow: hidden; }
+  .block .title { overflow: hidden; margin-bottom: 15px; }
+    .block .title .r { float: right; font-family: Arial; line-height: 20px; }
+      .block .title .r a { margin-left: 10px; }
+    .block .title h5 { margin: 0; padding-bottom: 5px; color: #3A3A3A; font-weight: normal; font-size: 15px; float: left; border-bottom: 2px solid #0088CC; font-weight: bold; }
+      .block .title h5 a { text-decoration: none; color: #3A3A3A; }
+      .block .title h5 i { margin-top: 1px; }
+    .block .title span.tag-name { margin-left: 20px; line-height: 20px; }
+  .block .group-tag { font-size: 12px; }
+    .block .group-tag ul { margin: 0; padding: 0 0 10px 0; }
+      .block .group-tag ul li { margin: 5px 5px 5px 0; float: left; width: 70px; text-align: center; line-height: 25px; }
+        .block .group-tag ul li a { display: block; }
+        .block .group-tag ul li a.active, .block .group-tag ul li a:hover { background: #0088CC; color: #FFF; text-decoration: none; }
+  .block ul { margin: 30px 0 10px 0; padding: 0; list-style: none; overflow: hidden; border-bottom: 1px solid #EEE; }
+    .block ul li.index-group div { padding-right: 10px; float: left; overflow: hidden; max-width: 270px; }
+    .block ul li.index-group div.group-avatar { text-align: center; }
+      .block ul li.index-group div.group-avatar img { width: 40px; height: 40px; }
+    .block ul li.index-group div.group-info { margin-top: -1px; }
+      .block ul li.index-group div.group-info a { font-weight: bold; }
+      .block ul li.index-group div p { font-size: 12px; color: #666; }
+      .block ul li.index-group div .muted { margin-left: 15px; font-size: 12px; }
+  .block ul.nav-tabs { border: none; }
+  /* 小组介绍 */
+  .block .group-instruction { margin: 0 0 20px 0; color: #666; }
+  /* End 小组介绍 */
+  /* 话题页标题 */
+  .block .topic-title { overflow: hidden; }
+    .block .topic-title h1 { font-size: 16px; line-height: 40px; color: #3A3A3A; float: left; }
+    .block .topic-title .r { float: right; font-family: Arial; line-height: 28px; line-height: 60px; }
+      .block .topic-title .r a { margin-left: 10px; }
+  /* End 话题页标题 */
+  /* 话题内容 */
+  .block .topic .avatar { background: #F6F6F6; text-align: center; }
+    .block .topic .avatar img { margin-top: 10px; width: 60px; height: 60px; }
+  .block .topic .content { margin: 5px 0px 50px 10px; font-size: 14px; color: #3A3A3A; line-height: 25px; }
+    .block .topic ul.inline { margin: 0 0 10px 0; padding: 0; border: none; }
+      .block .topic ul.inline li { margin-left: 10px; float: right; color: #999; font-size: 12px; }
+  /* End 话题内容 */
+  /* 话题列表 */
+  .block .topic-list .table td { padding: 15px 8px; }
+  .block .topic-list .group-name { margin-right: 10px; padding: 0 5px; background: #0088CC; float: left; }
+    .block .topic-list .group-name a { display: block; color: #FFF; text-decoration: none; }
+  .block .topic-list .title { margin-bottom: 10px; font-weight: bold; font-size: 14px; }
+  .block .topic-list ul.inline { margin: 0 0 10px 0; padding: 0; border: none; }
+    .block .topic-list ul.inline li { margin-right: 15px; float: left; color: #999; font-size: 12px; }
+  .block .topic-list .description { color: #666; font-size: 12px; }
+  /* End 话题列表 */
+  .xheditor-simple { width: 98%; height: 300px; line-height: 100%; }
+  .block blockquote div.status { float: left; width: 113px; }
+  .block blockquote a { margin: 0 0 0 10px; font-size: 12px; }
+  .block .search-form .q { width: 222px; }
+  .block ul.sidebar-group-list { margin: 0; padding: 0; border: none; }
+    .block ul.sidebar-group-list li { margin-bottom: 10px; }
+      .block ul.sidebar-group-list li a { margin-right: 10px; display: inline-block; position: relative; text-decoration: none; }
+        .block ul.sidebar-group-list li a img { height: 40px; }
+        .block ul.sidebar-group-list li a span.no { position: absolute; width: 17px; height: 17px; line-height: 17px; left: 0; top: 0; text-align: center; color: #FFF; font-size: 12px; }
+        .block ul.sidebar-group-list li a span.no-red { background: #BF0000; }
+        .block ul.sidebar-group-list li a span.no-gray { background: #5F5F5F; }
+      .block ul.sidebar-group-list li span.muted { line-height: 45px; }
+  /* 我加入的小组 */
+  .block .my-groups img { width: 40px; height: 40px; }
+  .block .my-groups ul { margin: 0; padding: 0; border: none; overflow: hidden; }
+    .block .my-groups ul li { margin: 0 34px 20px 0; width: 50px; float: left; }
+    .block .my-groups ul li.last { margin: 0; }
+  /* End 我加入的小组 */
+  /* 个人状态 */
+  .block .user { overflow: hidden; }
+    .block .user-avatar img { width: 60px; height: 60px; }
+    .block .user-info { margin: 0 0 5px 15px; }
+      .block .user-info strong.name { color: #333; }
+      .block .user-info .status { margin-top: 5px; max-width: 135px; }
+  .block .user-data { margin-top: 10px; clear: both; }
+  .block .user-data ul { margin: 0; padding: 0; border: none; }
+    .block .user-data ul li { width: 54px; float: left; color: #333; }
+      .block .user-data ul li a { text-decoration: none; color: #333; }
+      .block .user-data ul li a:hover { color: #08C; }
+      .block .user-data ul li strong { display: block; font-size: 14px; }
+  /* End 个人状态 */
+.footer { padding: 20px 0; margin-top: 20px; border-top: 1px solid #E5E5E5; background-color: whiteSmoke; font-size: 12px; }
