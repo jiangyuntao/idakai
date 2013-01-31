@@ -2,7 +2,7 @@ var EventProxy = require('eventproxy'),
     models = require('../models'),
     Page = models.Page;
 
-exports.detail = function(req, res){
+exports.detail = function(req, res) {
     var render = function(page) {
         res.render('topic/detail', {
             page: page

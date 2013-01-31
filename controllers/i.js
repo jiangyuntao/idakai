@@ -2,7 +2,7 @@ var EventProxy = require('eventproxy'),
     models = require('../models'),
     Page = models.Page;
 
-exports.home = function(req, res){
+exports.home = function(req, res) {
     var render = function(page) {
         res.render('i/home', {
             page: page
@@ -16,7 +16,7 @@ exports.home = function(req, res){
     });
 };
 
-exports.avatar = function(req, res){
+exports.avatar = function(req, res) {
     var render = function(page) {
         res.render('i/avatar', {
             page: page
@@ -30,7 +30,7 @@ exports.avatar = function(req, res){
     });
 };
 
-exports.profile = function(req, res){
+exports.profile = function(req, res) {
     var render = function(page) {
         res.render('i/profile', {
             page: page
