@@ -28,4 +28,6 @@ Topic.belongsTo(User);
 Post.belongsTo(Topic);
 Post.belongsTo(User);
 
-sequelize.sync();
+sequelize.sync().error(function(error) {
+    console.log(error);
+});
