@@ -1,7 +1,7 @@
 @import url("bootstrap.min.css");
 html { overflow-y: scroll; }
-body { color: #838383; line-height: 22px; font: 14/18px "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; background: url("../images/bg.png") repeat-x #FFF; }
-.margin-left-10 { margin-left: 10px; }
+body { color: #838383; line-height: 22px; font: 13/18px "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important; background: url("../images/bg.png") repeat-x #FFF; }
+.btn-small { font-size: 12px; }
 label.error { margin-left: 10px; display: inline; color: #D70002; }
 .table th.center, .table td.center { text-align: center; }
 .navbar .nav li a.dropdown-toggle { padding-right: 0; }

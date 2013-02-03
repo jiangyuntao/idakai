@@ -1,4 +1,4 @@
-var EventProxy = require('eventproxy'),
+var eventproxy = require('eventproxy'),
     models = require('../models'),
     Page = models.Page;
 
@@ -9,7 +9,7 @@ exports.home = function(req, res) {
         });
     }
 
-    var proxy = EventProxy.create('page', render);
+    var proxy = eventproxy.create('page', render);
 
     Page.find(1).success(function(page) {
         proxy.emit('page', page);
@@ -23,7 +23,7 @@ exports.avatar = function(req, res) {
         });
     }
 
-    var proxy = EventProxy.create('page', render);
+    var proxy = eventproxy.create('page', render);
 
     Page.find(1).success(function(page) {
         proxy.emit('page', page);
@@ -37,7 +37,7 @@ exports.profile = function(req, res) {
         });
     }
 
-    var proxy = EventProxy.create('page', render);
+    var proxy = eventproxy.create('page', render);
 
     Page.find(1).success(function(page) {
         proxy.emit('page', page);

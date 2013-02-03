@@ -1,6 +1,7 @@
-var EventProxy = require('eventproxy'),
+var eventproxy = require('eventproxy'),
+    crypto = require('crypto'),
     models = require('../models'),
-    Page = models.Page;
+    User = models.User;
 
 exports.signup = function(req, res) {
     var method = req.method.toLowerCase();
@@ -8,12 +9,26 @@ exports.signup = function(req, res) {
     if (method == 'get') {
         return res.render('auth/signup');
     } else if (method == 'post') {
+        var username = req.body.username.trim();
+        var password = md5(req.body.password);
+        var email = req.body.email.trim();
 
-        var proxy = EventProxy.create('page', render);
-
-        Page.find(1).success(function(page) {
-            proxy.emit('page', page);
+        User.find({
+            where: { username: username, email: email }
+        }).success(function(user) {
+        }).error(function(err) {
+            User.build({
+                username: username,
+                password: password,
+                email: email
+            }).save()
+            .success(function(user) {
+            })
+            .error(function(err) {
+            });
         });
+
+        var proxy = eventproxy.create('page', render);
     }
 };
 
@@ -24,7 +39,7 @@ exports.signin = function(req, res) {
         });
     }
 
-    var proxy = EventProxy.create('page', render);
+    var proxy = eventproxy.create('page', render);
 
     Page.find(1).success(function(page) {
         proxy.emit('page', page);
@@ -38,7 +53,7 @@ exports.signout = function(req, res) {
         });
     }
 
-    var proxy = EventProxy.create('page', render);
+    var proxy = eventproxy.create('page', render);
 
     Page.find(1).success(function(page) {
         proxy.emit('page', page);
@@ -73,3 +88,9 @@ exports.captcha = function(req, res) {
         res.end(buf);
     });
 };
+
+function md5(str) {
+    var md5sum = crypto.createHash('md5');
+    md5sum.update(str);
+    return md5sum.digest('hex');
+}

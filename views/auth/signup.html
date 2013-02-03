@@ -36,6 +36,7 @@
               <input type="text" id="email" name="email" placeholder="常用邮箱，如 @qq.com">
             </div>
           </div>
+          <!--
           <div class="control-group">
             <label class="control-label" for="captcha">验证码：</label>
             <div class="controls">
@@ -44,6 +45,7 @@
               <a href="javascript:;" title="看不清？换一张！" id="refresh_captcha"><img id="captcha_image" src="/captcha" /></a>
             </div>
           </div>
+          -->
           <div class="form-actions">
             <input type="submit" class="btn btn-success" value="注册成为会员" />
           </div>
@@ -81,6 +83,7 @@
 <script type="text/javascript">
 $(function() {
     $('#username').focus();
+    /**
     $('#refresh_captcha').click(function() {
         $('#captcha_image').attr('src', '/captcha/' + Math.random());
     });
@@ -110,6 +113,7 @@ $(function() {
             captcha: "请输入验证码"
         }
     });
+    /**/
 });
 </script>
 
