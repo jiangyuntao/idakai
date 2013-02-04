@@ -15,7 +15,8 @@ app.configure(function(){
     app.use(express.bodyParser());
     app.use(express.methodOverride());
     app.use(express.cookieParser(config.cookie_secret));
-    app.use(express.session());
+    //app.use(express.session());
+    app.use(require('./controllers/auth').auth);
     app.use(app.router);
     app.use(express.static(__dirname + '/public'));
 });

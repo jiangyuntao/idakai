@@ -1,5 +1,7 @@
 var eventproxy = require('eventproxy'),
     crypto = require('crypto'),
+    utils = require('Sequelize').Utils,
+    config = require('../config'),
     models = require('../models'),
     User = models.User;
 
@@ -13,51 +15,92 @@ exports.signup = function(req, res) {
         var password = md5(req.body.password);
         var email = req.body.email.trim();
 
-        User.find({
-            where: { username: username, email: email }
-        }).success(function(user) {
-        }).error(function(err) {
-            User.build({
-                username: username,
-                password: password,
-                email: email
-            }).save()
-            .success(function(user) {
-            })
-            .error(function(err) {
-            });
-        });
+        if (username.indexOf('@') != -1) {
+            res.render('auth/signup', { error: '用户名中不能包含@字符', username: username, email: email });
+            return;
+        }
 
-        var proxy = eventproxy.create('page', render);
+        User.count({
+            where: "username=" + utils.escape(username) + " OR email=" + utils.escape(email)
+        }).success(function(c) {
+            if (c) {
+                res.render('auth/signup', { error: '用户名或邮箱已被占用', username: username, email: email });
+                return;
+            } else {
+                User.create({
+                    username: username,
+                    password: password,
+                    email: email
+                })
+                .success(function(user) {
+                    res.render('auth/signup', { success: '注册成功，2秒后自动跳转', username: username, email: email });
+                    return;
+                })
+                .error(function(err) {
+                    res.render('auth/signup', { error: '注册失败，再试一次吧', username: username, email: email });
+                    return;
+                });
+            }
+        });
     }
 };
 
 exports.signin = function(req, res) {
-    var render = function(page) {
-        res.render('auth/signin', {
-            page: page
+    var method = req.method.toLowerCase();
+
+    if (method == 'get') {
+        return res.render('auth/signin');
+    } else if (method == 'post') {
+        var username = req.body.username.trim();
+        var password = md5(req.body.password);
+
+        if (username.indexOf('@') == -1) {
+            var condition = { username: username };
+        } else {
+            var condition = { email: username };
+        }
+
+        User.find({ where: condition }).success(function(user) {
+            if (user == null) {
+                res.render('auth/signin', { error: '用户不存在', username: username });
+                return;
+            }
+
+            if (md5(password) == user.password) {
+                var auth = encrypt(JSON.stringify({
+                    id: user.id,
+                    username: user.username,
+                    password: user.password,
+                    email: user.email,
+                    avatar: user.avatar
+                }), config.cookie_secret);
+
+                if (req.body.remember) {
+                    // cookie 保存2年
+                    res.cookie('auth', auth, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 730 });
+                } else {
+                    res.cookie('auth', auth);
+                }
+
+                res.redirect('/i/home');
+                return;
+            } else {
+                res.render('auth/signin', { error: '密码错误', username: username });
+                return;
+            }
         });
     }
-
-    var proxy = eventproxy.create('page', render);
-
-    Page.find(1).success(function(page) {
-        proxy.emit('page', page);
-    });
 };
 
 exports.signout = function(req, res) {
-    var render = function(page) {
-        res.render('auth/signout', {
-            page: page
-        });
-    }
+    res.clearCookie('auth');
+    res.redirect('/signin');
+};
 
-    var proxy = eventproxy.create('page', render);
-
-    Page.find(1).success(function(page) {
-        proxy.emit('page', page);
-    });
+exports.auth = function(req, res, next) {
+    var auth = JSON.parse(decrypt(req.cookies.auth, config.cookie_secret));
+    res.local('auth', auth);
+    return next();
 };
 
 exports.captcha = function(req, res) {
@@ -88,6 +131,21 @@ exports.captcha = function(req, res) {
         res.end(buf);
     });
 };
+
+function encrypt(str, secret) {
+    var cipher = crypto.createCipher('aes192', secret);
+    var enc = cipher.update(str, 'utf8', 'hex');
+    enc += cipher.final('hex');
+    return enc;
+}
+
+function decrypt(str, secret) {
+    var decipher = crypto.createDecipher('aes192', secret);
+    decipher.setAutoPadding(auto_padding = true);
+    var dec = decipher.update(str, 'hex', 'utf8');
+    dec += decipher.final('utf8');
+    return dec;
+}
 
 function md5(str) {
     var md5sum = crypto.createHash('md5');
