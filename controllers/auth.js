@@ -33,6 +33,15 @@ exports.signup = function(req, res) {
                     email: email
                 })
                 .success(function(user) {
+                    var auth = encrypt(JSON.stringify({
+                        id: user.id,
+                        username: user.username,
+                        password: user.password,
+                        email: user.email,
+                        avatar: user.avatar
+                    }), config.cookie_secret);
+                    res.cookie('auth', auth);
+
                     res.render('auth/signup', { success: '注册成功，2秒后自动跳转', username: username, email: email });
                     return;
                 })
@@ -52,7 +61,7 @@ exports.signin = function(req, res) {
         return res.render('auth/signin');
     } else if (method == 'post') {
         var username = req.body.username.trim();
-        var password = md5(req.body.password);
+        var password = req.body.password;
 
         if (username.indexOf('@') == -1) {
             var condition = { username: username };
@@ -77,7 +86,7 @@ exports.signin = function(req, res) {
 
                 if (req.body.remember) {
                     // cookie 保存2年
-                    res.cookie('auth', auth, { path: '/', maxAge: 1000 * 60 * 60 * 24 * 730 });
+                    res.cookie('auth', auth, { path: '/', maxAge: 3153600 * 2});
                 } else {
                     res.cookie('auth', auth);
                 }
@@ -98,8 +107,10 @@ exports.signout = function(req, res) {
 };
 
 exports.auth = function(req, res, next) {
-    var auth = JSON.parse(decrypt(req.cookies.auth, config.cookie_secret));
-    res.local('auth', auth);
+    if (req.cookies.auth != undefined) {
+        var auth = JSON.parse(decrypt(req.cookies.auth, config.cookie_secret));
+        res.locals.auth = auth;
+    }
     return next();
 };
 
@@ -133,14 +144,14 @@ exports.captcha = function(req, res) {
 };
 
 function encrypt(str, secret) {
-    var cipher = crypto.createCipher('aes192', secret);
+    var cipher = crypto.createCipher('aes-128-cbc', secret);
     var enc = cipher.update(str, 'utf8', 'hex');
     enc += cipher.final('hex');
     return enc;
 }
 
 function decrypt(str, secret) {
-    var decipher = crypto.createDecipher('aes192', secret);
+    var decipher = crypto.createDecipher('aes-128-cbc', secret);
     decipher.setAutoPadding(auto_padding = true);
     var dec = decipher.update(str, 'hex', 'utf8');
     dec += decipher.final('utf8');

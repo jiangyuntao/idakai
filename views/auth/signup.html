@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 {% if success %}<meta http-equiv="refresh" content="2; url=/i/home" />{% endif %}
-<title>新用户注册-大开网</title>
+<title>新用户注册_大开网</title>
 <link media="all" rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
 </head>
 <body>
@@ -36,19 +36,22 @@
           <div class="control-group">
             <label class="control-label" for="username">用户名：</label>
             <div class="controls">
-              <input type="text" id="username" name="username" placeholder="您在网站的标识，可用来登录" value="{{ username }}" />
+              <input type="text" id="username" name="username" placeholder="您在网站的标识，可用来登录" value="{{ username }}" tabindex="1" />
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="password">密码：</label>
             <div class="controls">
-              <input type="password" id="password" name="password" placeholder="密码必须在6位以上" />
+              <input type="password" id="password" name="password" placeholder="密码必须在6位以上" tabindex="2" />
+              <span class="help-inline">
+                <a id="password-display-toggle" href="javascript:;">显示密码</a>
+              </span>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="email">邮箱：</label>
             <div class="controls">
-              <input type="text" id="email" name="email" placeholder="常用邮箱，如 @qq.com" value="{{ email }}" />
+              <input type="text" id="email" name="email" placeholder="常用邮箱，如 @qq.com" value="{{ email }}" tabindex="3" />
             </div>
           </div>
           <!--
@@ -62,7 +65,7 @@
           </div>
           -->
           <div class="form-actions">
-            <input type="submit" class="btn btn-success" value="注册成为会员" />
+            <input type="submit" class="btn btn-success" value="注册成为会员" tabindex="4" />
           </div>
         </form>
 
@@ -129,6 +132,15 @@ $(function() {
         }
     });
     /**/
+    $('#password-display-toggle').click(function() {
+        if ($('#password').prop('type') == 'password') {
+            $('#password').prop('type', 'text');
+            $(this).html('隐藏密码');
+        } else {
+            $('#password').prop('type', 'password');
+            $(this).html('显示密码');
+        }
+    });
 });
 </script>
 

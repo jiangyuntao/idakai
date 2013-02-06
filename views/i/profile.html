@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>我的资料_大开网</title>
+<link media="all" rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
+</head>
+<body>
+  
+{% include 'public/header.html' %}
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="span9">
+      <div class="block">
+        <div class="title">
+          <h5><i class="icon-user"></i> 我的资料</h5>
+        </div>
+      </div>
+    </div>
+
+    <div class="span3">
+
+      <div class="block">
+        <div class="user">
+          <div class="user-avatar pull-left">
+            <img src="/images/tmp/a2.jpg" class="img-polaroid" />
+          </div>
+          <div class="user-info pull-left">
+            <strong class="name">无言以对</strong>
+            <div class="status muted">
+              今天天黑的好早啊今天天黑的好早啊
+            </div>
+          </div>
+        </div>
+        <div class="user-data">
+          <ul>
+            <li>
+              <a href="#">
+                <strong>23</strong>
+                <span>关注</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <strong>71</strong>
+                <span>粉丝</span>
+              </a>
+            </li>
+            <li>
+              <a href="__APP__/home">
+                <strong>2</strong>
+                <span>话题</span>
+              </a>
+            </li>
+            <li>
+              <a href="__APP__/home">
+                <strong>798</strong>
+                <span>积分</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="title">
+          <h5>我加入的小组</h5>
+          <span class="r">
+            <a href="__APP__/my/groups">全部</a>
+            <a href="__APP__/group/create">创建小组</a>
+          </span>
+        </div>
+        <div class="my-groups">
+          <ul>
+            <li>
+              <a rel="tooltip" title="我们都是小纯洁" href="/g/1"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="__APP__/g/1"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="__APP__/g/1"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a rel="tooltip" title="我们都是小纯洁" href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% include 'public/footer.html' %}
+<script type="text/javascript">
+$('a[rel="tooltip"]').tooltip();
+</script>
+
+</body>
+</html>

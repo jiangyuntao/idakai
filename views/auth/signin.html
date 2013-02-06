@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>大开网</title>
+<title>用户登录_大开网</title>
 <link media="all" rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
 </head>
 <body>
@@ -16,6 +16,14 @@
         <div class="title">
           <h5>用户登录</h5>
         </div>
+
+        {% if error %}
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ error }}
+        </div>
+        {% endif %}
+
         <form id="signin-form" class="form-horizontal" method="POST" action="">
           <div class="control-group">
             <label class="control-label" for="username">用户名/邮箱：</label>
