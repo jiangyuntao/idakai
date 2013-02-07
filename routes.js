@@ -17,7 +17,12 @@ module.exports = function(app) {
     app.get('/i/home', i.home);
     app.get('/i/avatar', i.avatar);
     app.get('/i/profile', i.profile);
+    app.post('/i/profile', i.profile);
+    app.get('/i/groups', i.groups);
 
+    app.get('/group/create', group.create);
+    app.post('/group/create', group.create);
     app.get('/g/:id', group.detail);
+
     app.get('/t/:id', topic.detail);
 };

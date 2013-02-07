@@ -1,6 +1,6 @@
 var eventproxy = require('eventproxy'),
-    crypto = require('crypto'),
     utils = require('Sequelize').Utils,
+    crypt = require('../libs/crypt'),
     config = require('../config'),
     models = require('../models'),
     User = models.User;
@@ -12,7 +12,7 @@ exports.signup = function(req, res) {
         return res.render('auth/signup');
     } else if (method == 'post') {
         var username = req.body.username.trim();
-        var password = md5(req.body.password);
+        var password = crypt.md5(req.body.password);
         var email = req.body.email.trim();
 
         if (username.indexOf('@') != -1) {
@@ -33,7 +33,7 @@ exports.signup = function(req, res) {
                     email: email
                 })
                 .success(function(user) {
-                    var auth = encrypt(JSON.stringify({
+                    var auth = crypt.encrypt(JSON.stringify({
                         id: user.id,
                         username: user.username,
                         password: user.password,
@@ -75,8 +75,8 @@ exports.signin = function(req, res) {
                 return;
             }
 
-            if (md5(password) == user.password) {
-                var auth = encrypt(JSON.stringify({
+            if (crypt.md5(password) == user.password) {
+                var auth = crypt.encrypt(JSON.stringify({
                     id: user.id,
                     username: user.username,
                     password: user.password,
@@ -85,8 +85,8 @@ exports.signin = function(req, res) {
                 }), config.cookie_secret);
 
                 if (req.body.remember) {
-                    // cookie 保存2年
-                    res.cookie('auth', auth, { path: '/', maxAge: 3153600 * 2});
+                    // cookie 保存1年
+                    res.cookie('auth', auth, { maxAge: 1000*60*60*24*365 });
                 } else {
                     res.cookie('auth', auth);
                 }
@@ -108,7 +108,7 @@ exports.signout = function(req, res) {
 
 exports.auth = function(req, res, next) {
     if (req.cookies.auth != undefined) {
-        var auth = JSON.parse(decrypt(req.cookies.auth, config.cookie_secret));
+        var auth = JSON.parse(crypt.decrypt(req.cookies.auth, config.cookie_secret));
         res.locals.auth = auth;
     }
     return next();
@@ -142,24 +142,3 @@ exports.captcha = function(req, res) {
         res.end(buf);
     });
 };
-
-function encrypt(str, secret) {
-    var cipher = crypto.createCipher('aes-128-cbc', secret);
-    var enc = cipher.update(str, 'utf8', 'hex');
-    enc += cipher.final('hex');
-    return enc;
-}
-
-function decrypt(str, secret) {
-    var decipher = crypto.createDecipher('aes-128-cbc', secret);
-    decipher.setAutoPadding(auto_padding = true);
-    var dec = decipher.update(str, 'hex', 'utf8');
-    dec += decipher.final('utf8');
-    return dec;
-}
-
-function md5(str) {
-    var md5sum = crypto.createHash('md5');
-    md5sum.update(str);
-    return md5sum.digest('hex');
-}
