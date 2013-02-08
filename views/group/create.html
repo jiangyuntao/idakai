@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+{% if success %}<meta http-equiv="refresh" content="2; url=/signout" />{% endif %}
+<title>创建小组_大开网</title>
+<link media="all" rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
+</head>
+<body>
+  
+{% include 'public/header.html' %}
+
+<div class="container">
+  <div class="row-fluid">
+    <div class="span9">
+      <div class="block">
+        <div class="title">
+          <h5>创建小组</h5>
+        </div>
+
+        {% if success %}
+        <div class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ success }}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="alert alert-error">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ error }}
+        </div>
+        {% endif %}
+
+        <form id="group-creation-form" class="form-horizontal" method="POST" action="">
+          <div class="control-group">
+            <label class="control-label" for="name">小组名称：</label>
+            <div class="controls">
+              <input type="text" id="name" name="name" />
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="description">简介：</label>
+            <div class="controls">
+              <textarea id="description" name="description" class="span10" rows="5"></textarea>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">访问控制：</label>
+            <div class="controls">
+              <label class="radio">
+                <input type="radio" name="type" value="public" /> 公开小组
+                <div class="help-inline">(所有人都可直接浏览发布内容)</div>
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="normal" checked="checked" /> 普通小组
+                <div class="help-inline">(需要加入小组方可浏览发布内容)</div>
+              </label>
+              <label class="radio">
+                <input type="radio" name="type" value="private" /> 私有小组
+                <div class="help-inline">(需要密码才可进入小组)</div>
+              </label>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" for="logo">小组LOGO：</label>
+            <div class="controls">
+              <input type="file" name="logo" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-success">申请创建</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="span3">
+
+      <div class="block">
+        <div class="user">
+          <div class="user-avatar pull-left">
+            <img src="/images/tmp/a2.jpg" class="img-polaroid" />
+          </div>
+          <div class="user-info pull-left">
+            <strong class="name">无言以对</strong>
+            <div class="status muted">
+              今天天黑的好早啊今天天黑的好早啊
+            </div>
+          </div>
+        </div>
+        <div class="user-data">
+          <ul>
+            <li>
+              <a href="#">
+                <strong>23</strong>
+                <span>关注</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <strong>71</strong>
+                <span>粉丝</span>
+              </a>
+            </li>
+            <li>
+              <a href="__APP__/home">
+                <strong>2</strong>
+                <span>话题</span>
+              </a>
+            </li>
+            <li>
+              <a href="__APP__/home">
+                <strong>798</strong>
+                <span>积分</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="block">
+        <div class="title">
+          <h5>我加入的小组</h5>
+          <span class="r">
+            <a href="__APP__/my/groups">全部</a>
+            <a href="__APP__/group/create">创建小组</a>
+          </span>
+        </div>
+        <div class="my-groups">
+          <ul>
+            <li>
+              <a rel="tooltip" title="我们都是小纯洁" href="/g/1"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="__APP__/g/1"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="__APP__/g/1"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a rel="tooltip" title="我们都是小纯洁" href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="/images/tmp/a2.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+            <li class="last">
+              <a href="#"><img src="/images/tmp/a1.jpg" alt="" class="img-polaroid" /></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% include 'public/footer.html' %}
+<script type="text/javascript">
+$(function() {
+    $('a[rel="tooltip"]').tooltip();
+    $('input[name="name"]').focus();
+});
+</script>
+
+</body>
+</html>
